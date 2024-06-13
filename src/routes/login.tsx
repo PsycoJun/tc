@@ -7,7 +7,7 @@ import { Form, Error, Input, Switcher, Title, Wrapper } from "../components/auth
 import GithubButton from "../components/github-btn";
 
 
-export default function CreateAccount(){
+export default function Login(){
 
     const[isLoading,setLoading] = useState(false)
     const[email,setEmail] = useState("");
@@ -51,7 +51,7 @@ export default function CreateAccount(){
             <Input onChange={onChange} type="submit" value={isLoading ? "Loading...": "Login"}/>
         </Form>
         {error !=="" ? <Error>{error}</Error>:null}
-        <Switcher>Don;t have an account?{""} <Link to ="/create-account">Create account &rarr;</Link></Switcher>
+        <Switcher>Don't have an account?{""} <Link to ="/create-account">Create account &rarr;</Link></Switcher>
         <GithubButton/>
     </Wrapper>
 }
