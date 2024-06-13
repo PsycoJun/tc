@@ -1,19 +1,20 @@
-import { Link, Outlet } from "react-router-dom";
-import { Wrapper } from './auth-components';
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { styled } from 'styled-components';
+import { auth } from "../routes/firebase";
 
 const Wrapper = styled.div`
-display: grid;
-gap:20px;
-padding:50px 0px;
-height:100%
-grid-template-columns:1fr 4fr;
-width:100%
-max-width:860px;`;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 4fr;
+  height: 100%;
+  padding: 50px 0px;
+  width: 100%;
+  max-width: 860px;
+`;
 
 const Menu = styled.div`
 display:flex;
-flex-directions:columns;
+flex-direction:column;
 align-items:center;
 gap:20px;
 `;
@@ -30,9 +31,23 @@ border-radius:50%;
 svg{
 width:30px;
 fill:white;}
+&.log-out{
+border-color:tomato;
+svg{fill:tomato;
+}}
 `;
 
 export default function Layout(){
+    const Navigate = useNavigate();
+    const onLogOut = async() => 
+        {
+            const ok = confirm("Are you sure to log out?");
+            if(ok){
+                await auth.signOut();
+                Navigate("/login")
+            }
+        }
+
     return (
         <Wrapper>
             <Menu>
@@ -47,7 +62,7 @@ export default function Layout(){
 </svg>
                 </MenuItem></Link>
                 <Link to = "/login">
-                <MenuItem>
+                <MenuItem onClick={onLogOut} className="log-out">
                 <svg  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <path clipRule="evenodd" fillRule="evenodd" d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z" />
   <path clipRule="evenodd" fillRule="evenodd" d="M6 10a.75.75 0 0 1 .75-.75h9.546l-1.048-.943a.75.75 0 1 1 1.004-1.114l2.5 2.25a.75.75 0 0 1 0 1.114l-2.5 2.25a.75.75 0 1 1-1.004-1.114l1.048-.943H6.75A.75.75 0 0 1 6 10Z" />

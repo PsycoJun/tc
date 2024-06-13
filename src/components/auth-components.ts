@@ -29,7 +29,6 @@ cursor:pointer;
 &:hover{
 opacity:0.8;}
 }
-}
 `;
 
 export const Title = styled.h1`
