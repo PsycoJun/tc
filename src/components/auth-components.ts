@@ -40,6 +40,12 @@ font-weight : 600;
 color:tomato;
 `;
 
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+
 export const Switcher = styled.span`
 margin-top:20px;
 a{
